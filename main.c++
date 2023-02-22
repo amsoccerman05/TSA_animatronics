@@ -7,6 +7,7 @@
 // Initialize the motor shield
 Adafruit_MotorShield AFMS = Adafruit_MotorShield();
 Adafruit_DCMotor *myMotor = AFMS.getMotor(1);
+Adafruit_DCMotor *myMotor1 = AFMS.getMotor(2);
 
 // Define the speaker pin
 int speakerPin = 9;
@@ -20,7 +21,7 @@ int ledPin = 6;
 // Define the number of LEDs in the strip
 int numLeds = 60;
 
-// Define the LED brightness
+// Define the LED brightness 
 int brightness = 255;
 
 // Define the LED color
@@ -41,7 +42,8 @@ void setup() {
   FastLED.setBrightness(brightness);
 
   // Set the motor speed
-  myMotor->setSpeed(255);
+  myMotor->setSpeed(10);
+  myMotor1->setSpeed(10);
 
   // Set up the button
   pinMode(buttonPin, INPUT_PULLUP);
@@ -55,6 +57,7 @@ void loop() {
   if (digitalRead(buttonPin) == LOW) {
     // Turn on the motor
     myMotor->run(FORWARD);
+    myMotor1->run(FORWARD);
 
     // Play a sound from the speaker
     tone1.play(NOTE_A7, 200);
@@ -69,5 +72,6 @@ void loop() {
   } else {
     // Turn off the motor
     myMotor->run(RELEASE);
+    myMotor1->run(RELEASE);
   }
 }
